@@ -13,7 +13,10 @@
           >arrow_back_ios_new
         </router-link>
 
-        <i class="material-icons post-details__reaction" @click="edit"
+        <i
+          class="material-icons post-details__reaction"
+          :class="{'post-details__reaction--active': postsStore.canEditPost}"
+          @click="edit"
           >edit_document</i
         >
 
@@ -27,20 +30,25 @@
           @click="changeReaction(id)"
           >favorite</i
         >
+        <a class="material-icons post-details__reaction" @click="delPost(idx)"
+          >delete_forever</a
+        >
       </div>
     </div>
     <EditPost v-if="postsStore.canEditPost" />
   </div>
 </template>
 <script>
-import {onBeforeUnmount} from 'vue'
 import {usePostsStore} from '../store/posts'
+import {useRouter} from 'vue-router'
+import {onBeforeUnmount} from 'vue'
 import EditPost from '../views/EditPost.vue'
 export default {
   props: ['id'],
   components: {EditPost},
   setup(props) {
     const postsStore = usePostsStore()
+    const router = useRouter()
     const getPost = () => postsStore.getCurrentPost(+props.id)
 
     const cleanCurrentPost = onBeforeUnmount(() => {
@@ -55,12 +63,20 @@ export default {
 
     const edit = () => postsStore.canEditPostToggle()
 
+    const delPost = (id) => {
+      postsStore.delCurrentPost(id)
+      postsStore.cleanCurrentPost()
+      router.push({name: 'Posts'})
+    }
+
     return {
       postsStore,
+      router,
       getPost,
       cleanCurrentPost,
       changeReaction,
       edit,
+      delPost,
     }
   },
 }
@@ -111,6 +127,13 @@ export default {
     font-size: 30px;
     transition: color 400ms;
     margin-right: 3px;
+    &:nth-child(3) {
+      padding: 0;
+      margin-right: 0;
+    }
+    &:nth-child(4) {
+      font-size: 34px;
+    }
     &:last-child {
       margin-right: 0;
     }

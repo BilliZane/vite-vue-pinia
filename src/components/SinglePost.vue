@@ -10,7 +10,7 @@
       </router-link>
       <i
         class="material-icons post__reaction"
-        :class="like ? 'post__reaction--active' : ''"
+        :class="{'post__reaction--active': like}"
         @click="changeReaction(id)"
         >favorite</i
       >
@@ -90,7 +90,7 @@ export default {
   }
   &__reaction {
     font-size: 30px;
-    margin-right: 10px;
+    margin-right: 5px;
     transition: color 400ms;
     &:hover {
       color: #f0a36f;

@@ -33,6 +33,9 @@
         :idx="idx"
       />
     </div>
+    <div class="posts__message" v-if="!postsStore.posts.length">
+      There are no posts here...
+    </div>
   </main>
 </template>
 <script>
@@ -57,7 +60,7 @@ export default {
     }, 300)
 
     const delPosts = () => {
-      postsStore.delPosts()
+      postsStore.delAllPosts()
     }
 
     const loadPostsByClick = () => {
@@ -179,6 +182,13 @@ export default {
       color: #4f2c62;
       cursor: pointer;
     }
+  }
+  &__message {
+    color: #2e2e2e;
+    font-size: 24px;
+    line-height: 30px;
+    font-weight: 600;
+    padding-bottom: 20px;
   }
 }
 </style>

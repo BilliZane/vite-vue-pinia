@@ -1,5 +1,5 @@
 <template>
-  <div class="caption">Change the text in fields below</div>
+  <div class="caption">Change the text in fields below:</div>
   <div class="edit-post">
     <input class="edit-post__title" v-model="postsStore.currentPost[0].title" />
     <textarea
@@ -62,6 +62,5 @@ export default {
   line-height: 30px;
   font-weight: 600;
   padding-bottom: 20px;
-  border-bottom: solid 1px rgba(255, 255, 255, 0.5);
 }
 </style>
