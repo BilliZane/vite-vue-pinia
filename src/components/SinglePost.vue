@@ -23,13 +23,13 @@
 <script>
 import {computed} from 'vue'
 import {usePostsStore} from '../store/posts'
+
 export default {
   props: ['id', 'idx', 'title', 'body', 'like'],
   setup(props) {
     const postsStore = usePostsStore()
-    const delPost = (idx) => {
-      postsStore.delCurrentPost(idx)
-    }
+
+    const delPost = (idx) => postsStore.delCurrentPost(idx)
     const titleSnippet = computed(() => props.title.substr(0, 50) + '...')
     const bodySnippet = computed(() => props.body.substr(0, 100) + '...')
 

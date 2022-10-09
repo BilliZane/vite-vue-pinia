@@ -6,22 +6,22 @@ import PostDetails from '../views/PostDetails.vue'
 
 const routes = [
   {
-    path: '/',
+    path: '/vite-vue-pinia/',
     name: 'Posts',
     component: Posts,
   },
   {
-    path: '/counter',
+    path: '/vite-vue-pinia/counter',
     name: 'Counter',
     component: Counter,
   },
   {
-    path: '/about',
+    path: '/vite-vue-pinia/about',
     name: 'About',
     component: About,
   },
   {
-    path: '/details/post/:id',
+    path: '/vite-vue-pinia/details/post/:id',
     name: 'PostDetails',
     component: PostDetails,
     props: true,

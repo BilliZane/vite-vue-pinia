@@ -7,5 +7,5 @@ export default defineConfig({
     port: 3000,
     hot: true,
   },
-  base: '/',
+  base: '/vite-vue-pinia/',
 })

@@ -33,9 +33,7 @@ export const usePostsStore = defineStore('posts', () => {
   }
 
   const delCurrentPost = (idx) => {
-    if (posts.value.length > 2) {
-      posts.value.splice(idx, 1)
-    }
+    posts.value.splice(idx, 1)
   }
 
   const delPosts = () => {
