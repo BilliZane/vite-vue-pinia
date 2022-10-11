@@ -1,5 +1,7 @@
 <template>
   <main class="posts">
+    <Modal v-if="modalStore.modalIsOpen"/>
+
     <h1 class="posts__title">Posts: {{ postsStore.postsCount }}</h1>
 
     <PostsLimit />
@@ -23,19 +25,23 @@
 </template>
 <script>
 import {usePostsStore} from '../store/posts'
+import {useModalStore} from '../store/modal'
 
 import PostsLimit from '../components/PostsLimit.vue'
 import SinglePost from '../components/SinglePost.vue'
 import Loader from '../components/Loader.vue'
 import PostsMessage from '../components/PostsMessage.vue'
+import Modal from '../components/Modal.vue'
 
 export default {
-  components: {PostsLimit, SinglePost, Loader, PostsMessage},
+  components: {PostsLimit, SinglePost, Loader, PostsMessage, Modal},
   setup() {
     const postsStore = usePostsStore()
+    const modalStore = useModalStore()
 
     return {
       postsStore,
+      modalStore,
     }
   },
 }

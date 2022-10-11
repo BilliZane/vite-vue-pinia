@@ -1,5 +1,7 @@
 <template>
   <div class="post-details__wrap">
+    <Modal v-if="modalStore.modalIsOpen" />
+
     <div
       class="post-details"
       v-for="post in postsStore.currentPost"
@@ -40,14 +42,19 @@
 </template>
 <script>
 import {usePostsStore} from '../store/posts'
+import {useModalStore} from '../store/modal'
+
 import {useRouter} from 'vue-router'
 import {onBeforeUnmount} from 'vue'
 import EditPost from '../views/EditPost.vue'
+import Modal from '../components/Modal.vue'
 export default {
   props: ['id'],
-  components: {EditPost},
+  components: {EditPost, Modal},
   setup(props) {
     const postsStore = usePostsStore()
+    const modalStore = useModalStore()
+
     const router = useRouter()
     const getPost = () => postsStore.getCurrentPost(+props.id)
 
@@ -63,14 +70,14 @@ export default {
 
     const edit = () => postsStore.canEditPostToggle()
 
-    const delPost = (id) => {
-      postsStore.delCurrentPost(id)
-      postsStore.cleanCurrentPost()
-      router.push({name: 'Posts'})
+    const delPost = () => {
+      postsStore.currentIdx = +props.id - 1
+      modalStore.toggleModal()
     }
 
     return {
       postsStore,
+      modalStore,
       router,
       getPost,
       cleanCurrentPost,

@@ -129,4 +129,5 @@ input, button, textarea {
 	border: none;
 	outline: none;
 	color: inherit;
+	background: none;
 }

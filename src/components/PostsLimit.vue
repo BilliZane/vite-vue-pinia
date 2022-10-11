@@ -32,7 +32,7 @@ export default {
 
     setTimeout(() => {
       loadPosts()
-    }, 300)
+    }, 700)
 
     const delPosts = () => {
       postsStore.delPosts()
@@ -40,7 +40,9 @@ export default {
 
     const loadPostsByClick = () => {
       postsStore.toggleCanGet()
-      loadPosts()
+      setTimeout(() => {
+        loadPosts()
+      }, 700)
     }
 
     const clearInput = () => {

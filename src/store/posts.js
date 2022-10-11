@@ -1,5 +1,3 @@
-// Composition API
-
 import {ref, computed} from 'vue'
 import {defineStore} from 'pinia'
 
@@ -10,6 +8,7 @@ export const usePostsStore = defineStore('posts', () => {
   const currentPost = ref(null)
   const error = ref(null)
   const canEditPost = ref(false)
+  const currentIdx = ref(null)
 
   const getPosts = async (limit) => {
     if (canGet.value) {
@@ -32,7 +31,12 @@ export const usePostsStore = defineStore('posts', () => {
     currentPost.value = posts.value.filter((post) => post.id === id)
   }
 
-  const delCurrentPost = (idx) => {
+  const delCurrentPostByIdx = (idx) => {
+    posts.value.splice(idx, 1)
+  }
+
+  const delCurrentPostById = (id) => {
+    const idx = posts.value.findIndex((post) => post.id === id)
     posts.value.splice(idx, 1)
   }
 
@@ -67,7 +71,8 @@ export const usePostsStore = defineStore('posts', () => {
     getPosts,
     currentPost,
     getCurrentPost,
-    delCurrentPost,
+    delCurrentPostByIdx,
+    delCurrentPostById,
     delPosts,
     changeReaction,
     postsCount,
@@ -76,33 +81,6 @@ export const usePostsStore = defineStore('posts', () => {
     cleanCurrentPost,
     canEditPost,
     canEditPostToggle,
+    currentIdx,
   }
 })
-
-// options API
-
-// import { defineStore } from "pinia";
-
-// export const usePostsStore = defineStore("posts", {
-//   state: () => ({
-//     posts: null,
-//     error: null,
-//   }),
-//   actions: {
-//     async getPosts() {
-//       try {
-//         const data = await fetch(
-//           "https://jsonplaceholder.typicode.com/posts?&_limit=5"
-//         );
-//         const posts = await data.json();
-//         this.posts = posts;
-//       } catch (err) {
-//         this.error = err.message;
-//         console.log(this.error);
-//       }
-//     },
-//   },
-//   getters: {
-//     showPosts: (state) => state.posts,
-//   },
-// });
