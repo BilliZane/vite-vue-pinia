@@ -1,3 +1,6 @@
+sentiment_dissatisfied
+
+
 <template>
   <div class="modal">
     <div class="modal__wrap">
@@ -67,7 +70,8 @@ export default {
   background: rgba(0, 0, 0, 0.7);
   overflow-y: hidden;
   &__wrap {
-    max-width: 250px;
+    min-width: 280px;
+    max-width: 300px;
 
     position: fixed;
     top: 50%;
